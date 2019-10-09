@@ -8,7 +8,6 @@ G = nx.karate_club_graph()
 # Create a new graph with the degree sequence of the Zachary’s Karate Club graph
 G=nx.configuration_model([d for n, d in G.degree()])
 config_model_degseq = [d for n, d in G.degree()]
-print(G.number_of_edges())
 
 # Remove selfloop from the new graph 
 G.remove_edges_from(G.selfloop_edges())
@@ -17,10 +16,6 @@ without_loop_degseq = [d for n, d in G.degree()]
 # Remove the parallel edges
 G=nx.Graph(G)
 without_paraledges_degseq = [d for n, d in G.degree()]
-
-print(config_model_degseq)
-print(without_loop_degseq)
-print(without_paraledges_degseq)
 
 # Removed edges ratio
 nb_edges_config_model = 0

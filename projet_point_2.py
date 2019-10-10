@@ -4,11 +4,11 @@
 # G = nx.karate_club_graph()
 # degs={}
 # for n in G.nodes():
-# 	deg = G.degree(n)
-# 	if deg not in degs:
-# 		degs[deg]=0
+#   deg = G.degree(n)
+#   if deg not in degs:
+#       degs[deg]=0
 
-# 	degs[deg]+=1
+#   degs[deg]+=1
 
 # items = sorted(degs.items())
 
@@ -28,7 +28,7 @@ deg, cnt = zip(*degreeCount.items())
 
 
 fig, ax = plt.subplots()
-plt.bar(deg, cnt, width=0.9, color=(0,0.5,0.7,1))
+plt.bar(deg, cnt, width=0.9, color=(0, 0.5, 0.7, 1))
 
 plt.title("Degree Histogram")
 plt.ylabel("Count")
@@ -38,5 +38,5 @@ ax.set_xticklabels(deg)
 
 # draw graph
 plt.axes([0.4, 0.38, 0.5, 0.5])
-nx.draw_circular(G, with_labels=True,node_color=(0,0.5,0.7))
+nx.draw_circular(G, with_labels=True, node_color=(0, 0.5, 0.7))
 plt.show()

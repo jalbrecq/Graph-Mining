@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import matplotlib.pyplot as plt
 import networkx as nx
 
 # The Zachary’s Karate Club graph
@@ -11,7 +10,6 @@ config_model_degseq = [d for n, d in G.degree()]
 
 # Remove selfloop from the new graph
 G.remove_edges_from(G.selfloop_edges())
-without_loop_degseq = [d for n, d in G.degree()]
 
 # Remove the parallel edges
 G = nx.Graph(G)
@@ -19,7 +17,6 @@ without_paraledges_degseq = [d for n, d in G.degree()]
 
 # Removed edges ratio
 nb_edges_config_model = 0
-nb_edges_without_loop = 0
 nb_edges_without_paraledges = 0
 for i in range(len(G)):
     nb_edges_config_model = nb_edges_config_model + config_model_degseq[i]

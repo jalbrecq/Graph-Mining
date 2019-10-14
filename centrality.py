@@ -1,6 +1,4 @@
 import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-from scipy import stats
 import networkx as nx
 
 G = nx.karate_club_graph()

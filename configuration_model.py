@@ -8,12 +8,12 @@ G = nx.karate_club_graph()
 G = nx.configuration_model([d for n, d in G.degree()])
 config_model_degseq = [d for n, d in G.degree()]
 
-# Remove selfloop from the new graph
-G.remove_edges_from(G.selfloop_edges())
-
 # Remove the parallel edges
 G = nx.Graph(G)
 without_paraledges_degseq = [d for n, d in G.degree()]
+
+# Remove selfloop from the new graph
+G.remove_edges_from(G.selfloop_edges())
 
 # Removed edges ratio
 nb_edges_config_model = 0

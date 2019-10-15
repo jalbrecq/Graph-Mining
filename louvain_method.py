@@ -15,8 +15,9 @@ for com in set(partition.values()):
     count = count + 1.
     list_nodes = [nodes for nodes in partition.keys()
                   if partition[nodes] == com]
-    nx.draw_networkx_nodes(G, pos, list_nodes, node_size=20,
-                           node_color=str(count * 0.7 / size))
+    # nx.draw_networkx_nodes(G, pos, list_nodes, node_size=20, node_color=str(count * 1. / size))
+    nx.draw_networkx_nodes(G, pos, list_nodes, node_size=20, node_color=(count * 0.99/ size,count * 0.99/ size, count * 0.01 / size))
 
-nx.draw_networkx_edges(G, pos, alpha=0.5)
+nx.draw_networkx_edges(G, pos, alpha=0.2)
+
 plt.show()

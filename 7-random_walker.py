@@ -41,4 +41,9 @@ print("Number of step =", step)
 # print(visited_nodes)
 # print(mostvisited)
 
+# draw graph
+plt.axes([0.25, 0.38, 0.5, 0.5])
+nx.draw_circular(G, with_labels=True, node_color=(0, 0.5, 0.7))
+
+
 plt.show()

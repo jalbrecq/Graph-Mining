@@ -2,6 +2,7 @@ import random
 import community
 import networkx as nx
 import matplotlib.pyplot as plt
+import numpy
 
 data = []
 
@@ -25,8 +26,8 @@ for graph_id in range(0, 100):
     av_clustering_random += nx.average_clustering(G)
     
     data.append([])
+
 print(av_clustering_random)
 av_clustering_random /= 100
-
 print(clustering_karate,av_clustering_random)
 

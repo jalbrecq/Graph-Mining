@@ -1,3 +1,4 @@
+import random
 import community
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -9,7 +10,17 @@ for graph_id in range(0, 102):
     if(graph_id == 0):
         G = nx.karate_club_graph()
     else:
-        G = nx.gnm_random_graph(34, 78)
+        G = nx.Graph()
+
+        nodes = list(range(33))
+
+        for i in range(78):
+            src = random.choice(nodes)
+            dest = random.choice(nodes)
+            while src == dest:
+                dest = random.choice(nodes)
+
+            G.add_edge(src, dest)
 
     data.append([])
 

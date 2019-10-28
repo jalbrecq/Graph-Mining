@@ -5,14 +5,14 @@ import matplotlib.pyplot as plt
 
 data = []
 
-for graph_id in range(0, 102):
+for graph_id in range(0, 101):
 
     if(graph_id == 0):
         G = nx.karate_club_graph()
     else:
         G = nx.Graph()
 
-        nodes = list(range(33))
+        nodes = list(range(34))
 
         for i in range(78):
             src = random.choice(nodes)

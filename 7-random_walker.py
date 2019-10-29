@@ -8,53 +8,56 @@ G = nx.karate_club_graph()
 data = {}
 data2 = {}
 
-for start in range(0, 34):
-	# choose a random starting possiton
-	# possition = rdm.choice(list(G.nodes))
-	print("Starting node =", start)
-	print("Degree of the starting node =", G.degree[start])
+for x in range(0, 1000):
+	for start in range(0, 34):
 
-	visited_nodes = {} 
+		print("Starting node =", start)
+		print("Degree of the starting node =", G.degree[start])
 
-	step = 0
-	possition = start
+		visited_nodes = {} 
 
-	while len(visited_nodes) != 34:
+		step = 0
+		possition = start
 
-	    if possition in visited_nodes:
-	        visited_nodes[possition]+=1
-	    else:
-	        visited_nodes[possition]=1
+		while len(visited_nodes) != 34:
 
-	    neighbors = list(G.neighbors(possition))
-	    possition = rdm.choice(neighbors)
+		    if possition in visited_nodes:
+		        visited_nodes[possition]+=1
+		    else:
+		        visited_nodes[possition]=1
 
-	    step+=1
-	    pass
+		    neighbors = list(G.neighbors(possition))
+		    possition = rdm.choice(neighbors)
 
-	data2[start] = step
+		    step+=1
+		    pass
 
-	if G.degree[start] in data:
-		old_step = data[G.degree[start]]
-		data[G.degree[start]] = (old_step + step)/2
-	else:
-		data[G.degree[start]] = step
+		if start in data2:
+			old_step = data2[start]
+			data2[start] = (old_step + step)/2
+		else:
+			data2[start] = step
 
-	# nodes, y = zip(*visited_nodes.items())
-	# fig, ax = plt.subplots()
-	# plt.bar(nodes, y, width=0.9, color=(0, 0.5, 0.7, 1))
-	# plt.title("Histogramme du nombre de passage")
-	# plt.ylabel("Count")
-	# plt.xlabel("Nodes")
-	# ax.set_xticks([x for x in nodes])
-	# ax.set_xticklabels(nodes)
+		if G.degree[start] in data:
+			old_step = data[G.degree[start]]
+			data[G.degree[start]] = (old_step + step)/2
+		else:
+			data[G.degree[start]] = step
 
-	print("Number of step =", step)
-	print("-"*40)
-	# mostvisited = sorted(visited_nodes, key = visited_nodes.get,reverse = True)
-	# print(visited_nodes)
-	# print(mostvisited)
+		# nodes, y = zip(*visited_nodes.items())
+		# fig, ax = plt.subplots()
+		# plt.bar(nodes, y, width=0.9, color=(0, 0.5, 0.7, 1))
+		# plt.title("Histogramme du nombre de passage")
+		# plt.ylabel("Count")
+		# plt.xlabel("Nodes")
+		# ax.set_xticks([x for x in nodes])
+		# ax.set_xticklabels(nodes)
 
+		print("Number of step =", step)
+		print("-"*40)
+		# mostvisited = sorted(visited_nodes, key = visited_nodes.get,reverse = True)
+		# print(visited_nodes)
+		# print(mostvisited)
 
 degrees, steps = zip(*data.items())
 fig, ax = plt.subplots()

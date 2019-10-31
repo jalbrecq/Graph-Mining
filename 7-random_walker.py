@@ -18,8 +18,9 @@ G = nx.karate_club_graph()
 
 step_by_start = {}
 step_by_start_degree = {}
+box_plot_data = {}
 
-for x in range(0, 10000):
+for x in range(0, 1000):
     av_visited_nodes = {}
     print("ITERATION : ", x)
 
@@ -51,6 +52,11 @@ for x in range(0, 10000):
         else:
             step_by_start_degree[G.degree[start]] = step
 
+        if G.degree[start] in box_plot_data:
+            box_plot_data[G.degree[start]].append(step)
+        else:
+            box_plot_data[G.degree[start]] = [step]
+
         for node in visited_nodes:
             if node in av_visited_nodes:
                 av_visited_nodes[node] = (av_visited_nodes[node] + visited_nodes[node]) / 2
@@ -75,3 +81,6 @@ for node in av_visited_nodes:
         visited_nodes_by_degree[G.degree[node]] = av_visited_nodes[node]
 create_graph(visited_nodes_by_degree, "Nombre de passages en fonction du degre de la node", "Count", "Degree")
 
+degree, steps = zip(*box_plot_data.items())
+plt.boxplot(list(steps), patch_artist=True, labels=list(degree))
+plt.show()

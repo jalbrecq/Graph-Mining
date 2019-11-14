@@ -23,11 +23,18 @@ for graph_id in range(0, 100):
 
         G.add_edge(src, dest)
 
-    av_clustering_random += nx.average_clustering(G)
-    
-    data.append([])
+    av_clustering_random += nx.average_clustering(G)    
+    data.append(nx.average_clustering(G))
 
-print(av_clustering_random)
 av_clustering_random /= 100
-print(clustering_karate,av_clustering_random)
+print("clustering karaté =",clustering_karate,"clustering moyen =",av_clustering_random)
+
+variance=0
+for i in data:
+    variance+=(i-av_clustering_random)**2
+
+variance/=100
+ecart_type= (variance)**(1/2)
+
+print("variance =",variance,"ecart-type =",ecart_type)
 

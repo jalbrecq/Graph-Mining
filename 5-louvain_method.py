@@ -40,6 +40,10 @@ for graph_id in range(0, 101):
     pos = nx.spring_layout(G)
     plt.figure(figsize=(8, 8))
     plt.axis('off')
+    if graph_id == 0:
+        plt.title("Graph Karaté club")
+    else:
+        plt.title("Graph n°" + str(graph_id))
     nx.draw_networkx_nodes(G, pos, node_size=600, cmap=plt.cm.RdYlBu, node_color=list(partition.values()))
     nx.draw_networkx_edges(G, pos, alpha=0.3)
     plt.show(G)

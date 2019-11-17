@@ -7,19 +7,29 @@ data = []
 
 for graph_id in range(0, 101):
 
+    # the first graph is the karate club graph
     if(graph_id == 0):
         G = nx.karate_club_graph()
+    # all the other one are random graphs
     else:
+        # create a empty graph
         G = nx.Graph()
 
+        # create a list of 34 nodes
         nodes = list(range(34))
 
+        # create 78 links
         for i in range(78):
+            # select a random source
             src = random.choice(nodes)
+            # select a random destination
             dest = random.choice(nodes)
-            while src == dest:
+
+            # make sure the source and the destination are differents
+            while src == dest or G.has_edge(src, dest):
                 dest = random.choice(nodes)
 
+            # create the link beteewn the selected nodes
             G.add_edge(src, dest)
 
     data.append([])
@@ -36,6 +46,10 @@ for graph_id in range(0, 101):
                       if partition[nodes] == com]
 
         data[graph_id].append((i, len(list_nodes)))
+
+    # valeur de la modularité
+    mod = community.modularity(partition,G)
+    print("modularity: %0.5f"%mod)
 
     pos = nx.spring_layout(G)
     plt.figure(figsize=(8, 8))

@@ -8,12 +8,18 @@ G = nx.karate_club_graph()
 G = nx.configuration_model([d for n, d in G.degree()])
 config_model_degseq = [d for n, d in G.degree()]
 
+nx.nx_pydot.write_dot(G,'dot_files/graph.dot')
+
 # Remove the parallel edges
 G = nx.Graph(G)
 without_paraledges_degseq = [d for n, d in G.degree()]
 
+nx.nx_pydot.write_dot(G,'dot_files/no_paraledges.dot')
+
 # Remove selfloop from the new graph
 G.remove_edges_from(G.selfloop_edges())
+
+nx.nx_pydot.write_dot(G,'dot_files/no_paraledges_no_selfloop.dot')
 
 # Removed edges ratio
 nb_edges_config_model = 0

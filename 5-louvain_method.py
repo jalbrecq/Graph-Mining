@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 
 data = []
 configuration_model = False
+no_selfloop_no_parraledge = False
 
 for graph_id in range(0, 101):
 
@@ -13,8 +14,14 @@ for graph_id in range(0, 101):
         G = nx.karate_club_graph()
     # all the other one are random graphs
     else:
-        if configuration_model==True:
+        if configuration_model:
             G = nx.configuration_model([d for n, d in nx.karate_club_graph().degree()])
+            if no_selfloop_no_parraledge:
+
+                # Remove the parallel edges
+                G = nx.Graph(G)
+                # Remove selfloop from the new graph
+                G.remove_edges_from(G.selfloop_edges())
 
         else:
             # create a empty graph

@@ -4,6 +4,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 data = []
+configuration_model = False
 
 for graph_id in range(0, 101):
 
@@ -12,25 +13,29 @@ for graph_id in range(0, 101):
         G = nx.karate_club_graph()
     # all the other one are random graphs
     else:
-        # create a empty graph
-        G = nx.Graph()
+        if configuration_model==True:
+            G = nx.configuration_model([d for n, d in nx.karate_club_graph().degree()])
 
-        # create a list of 34 nodes
-        nodes = list(range(34))
+        else:
+            # create a empty graph
+            G = nx.Graph()
 
-        # create 78 links
-        for i in range(78):
-            # select a random source
-            src = random.choice(nodes)
-            # select a random destination
-            dest = random.choice(nodes)
+            # create a list of 34 nodes
+            nodes = list(range(34))
 
-            # make sure the source and the destination are differents
-            while src == dest or G.has_edge(src, dest):
+            # create 78 links
+            for i in range(78):
+                # select a random source
+                src = random.choice(nodes)
+                # select a random destination
                 dest = random.choice(nodes)
 
-            # create the link beteewn the selected nodes
-            G.add_edge(src, dest)
+                # make sure the source and the destination are differents
+                while src == dest or G.has_edge(src, dest):
+                    dest = random.choice(nodes)
+
+                # create the link beteewn the selected nodes
+                G.add_edge(src, dest)
 
     data.append([])
 

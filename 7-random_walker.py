@@ -2,6 +2,7 @@ import networkx as nx
 import random as rdm
 import matplotlib.pyplot as plt
 
+# function for graph creation
 def create_graph(dic, titre, y_label, x_label):
     nodes, y = zip(*dic.items())
     fig, ax = plt.subplots()
@@ -16,32 +17,42 @@ def create_graph(dic, titre, y_label, x_label):
 # generate the graph
 G = nx.karate_club_graph()
 
+# initialise data
 step_by_start = {}
 step_by_start_degree = {}
 box_plot_data = {}
 
+# run the random walker 1000 times
 for x in range(0, 1000):
     av_visited_nodes = {}
     print("ITERATION : ", x)
-
+    
+    # run the random walker with each time a different starting node
+    # all the network node will be selected to be the starting node
     for start in range(0, 34):
+        # the initialise the random walker
         step = 0
         possition = start
 
         visited_nodes = {}
+        # the random walker keep walking until each node has not been visited
         while len(visited_nodes) != 34:
 
             if possition in visited_nodes:
                 visited_nodes[possition]+=1
             else:
                 visited_nodes[possition]=1
-
+            
+            # list all the neighbors of random walker node  
             neighbors = list(G.neighbors(possition))
+            # choose a random neighbors and put the walker on it
             possition = rdm.choice(neighbors)
-
+            
+            # increase the number of step
             step+=1
             pass
-
+        
+        # colect data
         if start in step_by_start:
             step_by_start[start] = (step_by_start[start] + step) / 2
         else:

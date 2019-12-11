@@ -26,7 +26,7 @@ box_plot_data = {}
 for x in range(0, 1000):
     av_visited_nodes = {}
     print("ITERATION : ", x)
-    
+
     # run the random walker with each time a different starting node
     # all the network node will be selected to be the starting node
     for start in range(0, 34):
@@ -42,16 +42,16 @@ for x in range(0, 1000):
                 visited_nodes[possition]+=1
             else:
                 visited_nodes[possition]=1
-            
-            # list all the neighbors of random walker node  
+
+            # list all the neighbors of random walker node
             neighbors = list(G.neighbors(possition))
             # choose a random neighbors and put the walker on it
             possition = rdm.choice(neighbors)
-            
+
             # increase the number of step
             step+=1
             pass
-        
+
         # colect data
         if start in step_by_start:
             step_by_start[start] = (step_by_start[start] + step) / 2
@@ -76,12 +76,16 @@ for x in range(0, 1000):
 
 # number of step by starting node
 create_graph(step_by_start, "Nombre de pas en fonction de la node de depart", "Steps", "Starting Nodes")
+print(step_by_start)
+print(40*"-")
 
 # number of step by degree of the starting node
 create_graph(step_by_start_degree, "Nombre de pas en fonction du degre de la node de depart", "Steps", "Degree of starting Nodes")
+print(step_by_start_degree)
 
 # number of step by node
 create_graph(av_visited_nodes, "Nombre de passages dans une node", "Count", "Nodes")
+print(av_visited_nodes)
 
 # number of step by degree of nodes
 visited_nodes_by_degree = {}
@@ -91,6 +95,7 @@ for node in av_visited_nodes:
     else:
         visited_nodes_by_degree[G.degree[node]] = av_visited_nodes[node]
 create_graph(visited_nodes_by_degree, "Nombre de passages dans une node en fonction de son degre", "Count", "Degree")
+print(visited_nodes_by_degree)
 
 degree, steps = zip(*box_plot_data.items())
 plt.boxplot(list(steps), patch_artist=True, labels=list(degree))

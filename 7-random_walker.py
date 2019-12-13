@@ -1,6 +1,7 @@
 import networkx as nx
 import random as rdm
 import matplotlib.pyplot as plt
+import numpy as np
 
 # function for graph creation
 def create_graph(dic, titre, y_label, x_label):
@@ -21,7 +22,6 @@ G = nx.karate_club_graph()
 step_by_start = {}
 step_by_start_degree = {}
 box_plot_data = {}
-
 # run the random walker 1000 times
 for x in range(0, 1000):
     av_visited_nodes = {}
@@ -76,16 +76,18 @@ for x in range(0, 1000):
 
 # number of step by starting node
 create_graph(step_by_start, "Nombre de pas en fonction de la node de depart", "Steps", "Starting Nodes")
-print(step_by_start)
-print(40*"-")
+# print(step_by_start)
+# print(40*"-")
 
 # number of step by degree of the starting node
 create_graph(step_by_start_degree, "Nombre de pas en fonction du degre de la node de depart", "Steps", "Degree of starting Nodes")
-print(step_by_start_degree)
+# print(step_by_start_degree)
+# print(40*"-")
 
 # number of step by node
 create_graph(av_visited_nodes, "Nombre de passages dans une node", "Count", "Nodes")
-print(av_visited_nodes)
+# print(av_visited_nodes)
+# print(40*"-")
 
 # number of step by degree of nodes
 visited_nodes_by_degree = {}
@@ -95,7 +97,16 @@ for node in av_visited_nodes:
     else:
         visited_nodes_by_degree[G.degree[node]] = av_visited_nodes[node]
 create_graph(visited_nodes_by_degree, "Nombre de passages dans une node en fonction de son degre", "Count", "Degree")
-print(visited_nodes_by_degree)
+# print(visited_nodes_by_degree)
+# print(40*"-")
+
+
+median_by_start_deg = {}
+for deg in box_plot_data:
+    median_by_start_deg[deg] = np.median(np.array(box_plot_data[deg]))
+create_graph(median_by_start_deg, "Mediane du nombre de passage en fonction du degre du noeud de depart", "Median", "Degree")
+# print(visited_nodes_by_degree)
+# print(40*"-")
 
 degree, steps = zip(*box_plot_data.items())
 plt.boxplot(list(steps), patch_artist=True, labels=list(degree))

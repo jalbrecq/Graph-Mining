@@ -13,7 +13,7 @@ av_clustering_random = 0
 av_clustering_biggest_com=0
 
 #bool to display the graphs and its biggest community 
-display= True
+display= False
 
 for graph_id in range(0, 101):
 

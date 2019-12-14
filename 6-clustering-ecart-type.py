@@ -12,6 +12,9 @@ clustering_karate = nx.average_clustering(nx.karate_club_graph())
 av_clustering_random = 0
 av_clustering_biggest_com=0
 
+#bool to display the graphs and its biggest community 
+display= True
+
 for graph_id in range(0, 101):
 
     # the first graph is the karate club graph
@@ -54,6 +57,15 @@ for graph_id in range(0, 101):
             link=edge[1]
             if link in biggest_community:                   
                 H.add_edge(node, link) 
+    #just to display or not the graphs and the graph for the biggest community 
+    if display:
+        plt.subplot(121)
+        plt.title("biggest_community")
+        nx.draw_circular(H, with_labels=True)
+        plt.subplot(122)
+        plt.title("original graph")
+        nx.draw_circular(G, with_labels=True)
+        plt.show()
 
     if graph_id == 0:
         big_com_clustring_karate = nx.average_clustering(H)
@@ -61,6 +73,7 @@ for graph_id in range(0, 101):
         av_clustering_biggest_com += nx.average_clustering(H)
         data_biggest_com.append(nx.average_clustering(H))
 
+#compute the average clustering for the graphs and the biggest community
 av_clustering_random /= 100
 av_clustering_biggest_com /= 100
 print("clustering karate =",clustering_karate)
@@ -68,6 +81,7 @@ print("clustering of the biggest community of the karate graph =", big_com_clust
 print("average clustering 100 random graph=",av_clustering_random)
 print("average clustering biggest community 100 random graph =",av_clustering_biggest_com,"\n")
 
+#compute the average variances and standard deviations for the graphs and the biggest community
 variance=0
 for i in data_graph:
     variance += (i-av_clustering_random)**2
